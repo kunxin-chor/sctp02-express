@@ -1,0 +1,39 @@
+{{#extends "base"}}
+    {{#block "content"}}
+    <h1>Survey Form</h1>
+
+    <form method="POST">
+        <div>
+            <label>First Name</label>
+            <input type="text" class="form-control" name="firstName"/>
+        </div>
+        <div>
+            <label>Last Name</label>
+            <input type="text" class="form-control" 
+                name="lastName"/>
+        </div>
+        <div>
+            <label>Gender</label>
+            <input type="radio" name="gender" value="male" checked/><label>Male</label>
+            <input type="radio" name="gender" value="female"/><label>Female</label>
+        </div>
+        <div>
+            <label>Hobbies</label>
+            <input type="checkbox" name="hobbies" value="cycling"/><label>Cycling</label>
+            <input type="checkbox" name="hobbies" value="reading"/><label>Reading</label>
+            <input type="checkbox" name="hobbies" value="sleeping"/><label>Sleeping</label>
+        </div>
+        <div>
+        <label>Country</label>
+            <select name="country" class="form-control">
+                <option value="singapore">Singapore</option>
+                <option value="malaysia">Malaysia</option>
+                <option value="indonesia">Indonesia</option>
+                <option value="new_zealand">New Zealand</option>
+            </select>
+        </div>
+        <input type="submit" class="btn btn-primary mt-3"/>
+    </form>
+
+    {{/block}}
+{{/extends}}
