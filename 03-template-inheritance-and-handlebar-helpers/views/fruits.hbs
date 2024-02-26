@@ -1,0 +1,25 @@
+{{#extends "base"}}
+
+{{#block "content"}}
+    {{#if isRaining }}
+    <div class="alert alert-danger">
+        It's raining, bring an umbrella!
+    </div>
+    {{/if}}
+
+    {{#ifEquals favorite "apples"}} 
+        <p>You like apples</p>
+    {{else}}
+        <p>You dislike apples</p> 
+    {{/ifEquals}}  
+
+    <h2>List of Fruits</h2>
+    <ul>
+    {{#each fruits}}
+        <li>{{this}}</li>
+    {{/each}}
+    </ul>
+
+{{/block}}
+
+{{/extends}}
