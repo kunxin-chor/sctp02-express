@@ -1,0 +1,42 @@
+{{#extends "base"}}
+
+{{#block "content"}}
+<form method="POST">
+    <div>
+        <label>Email:</label>
+        <input type="text" name="email" class="form-control"/>
+    </div>
+    <div>
+        <label>Seating Type:</label>
+        <input type="radio" name="seatType" value="indoors"/>
+        <label>Indoors</label>
+        <input type="radio" name="seatType" value="outdoors"/>
+        <label>Outdoors</label>
+    </div>
+    <div>
+        <label>Add-ons</label>
+        <input type="checkbox" name="addOns" value="child-seat"/>
+        <label>Child Seat</label>
+        <input type="checkbox" name="addOns" value="romantic-music"/>
+        <label>Romantic Music</label>
+        <input type="checkbox" name="addOns" value="manicure"/>
+        <label>Manicure</label>
+        <input type="checkbox" name="addOns" value="birthday"/>
+        <label>Birthday Surprise</label>
+    </div>
+    <div>
+        <label>Meal Timing</label>
+        <select name="mealTiming" class="form-control">
+            <option value="breakfast">Breakfast</option>
+            <option value="lunch">Lunch</option>
+            <option value="high-tea">High Tea</option>
+            <option value="dinner">Dinner</option>
+            <option value="supper">Supper</option>
+        </select>
+    </div>
+   <input type="submit" value="Reserve" class="btn btn-primary mt-3"/>
+</form>
+ 
+{{/block}}
+
+{{/extends}}
