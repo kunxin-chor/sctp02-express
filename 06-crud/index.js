@@ -47,6 +47,42 @@ app.get('/', function(req,res){
     })
 })
 
+// route to display the form
+app.get('/create', function(req,res){
+    res.render('create');
+})
+
+// route to process the form
+app.post('/create', function(req,res){
+
+    // ensure that selectedTags will be an array
+    // if the user selected no tags -> empty array
+    // if the user selected one tag -> array of one string inside
+    // if the user selected multiple tags -> array of many strings 
+    let selectedTags = [];
+    if (req.body.tags) {
+        if (Array.isArray(req.body.tags)) {
+            selectedTags = req.body.tags
+        } else {
+            selectedTags = [ req.body.tags];
+        }
+    }
+
+    const newFood = {
+        id: Math.floor(Math.random() * 1000000 + 1),
+        foodName: req.body.foodName,
+        calories: req.body.calories,
+        meal: req.body.meal,
+        tags: selectedTags
+    }
+    foodRecords.push(newFood);
+
+    // a redirect response tells the browser
+    // to a different url on the same server (if the url is relative)
+    res.redirect("/");
+    console.log(req.body);
+})
+
 // 3. START SERVER
 app.listen(3000, function(){
     console.log("Server has started")
