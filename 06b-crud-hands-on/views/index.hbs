@@ -16,6 +16,7 @@
                 <th>Price</th>
                 <th>Payments</th>
                 <th>Type</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -26,6 +27,9 @@
                 <td>{{this.price}}</td>
                 <td>{{this.payments}}</td>
                 <td>{{this.type}}</td>
+                <td>
+                    <a href="/delete-listing/{{this.id}}">Delete</a>
+                </td>
             </tr>
             {{/each}}
         </tbody>
