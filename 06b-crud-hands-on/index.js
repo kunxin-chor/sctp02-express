@@ -4,6 +4,12 @@
 const express = require('express');
 const hbs = require('hbs');
 
+// setup handlebars-helpers 
+// AFTER const hbs=require('hbs')
+const handlebarHelpers = require('handlebars-helpers')({
+    'handlebars': hbs.handlebars
+})
+
 // create an express application
 const app = express();
 
@@ -140,6 +146,75 @@ app.post('/delete-listing/:listingid', function(req,res){
 
     res.redirect('/');
 })
+
+// One route to display the form
+app.get('/edit-listing/:listingid', function(req,res){
+    // 1. get the id of the listing that we want to update
+    const idToEdit = req.params.listingid;
+
+    // 2. get the listing object associated with the id
+    // (so that we can display its name and other details in the form)
+    let listingToEdit = null;
+    for (let record of database) {
+        if (record.id == idToEdit) {
+            listingToEdit = record;
+            break;
+        }
+    }
+
+    // 3. render the form
+    res.render('edit-listing', {
+        'record': listingToEdit
+    })
+})
+
+
+// One route to process the update
+app.post('/edit-listing/:listingid', function(req,res){
+    // 1. Retrive the id of the listing that we want to update
+    const listingId = req.params.listingid;
+
+    // 2. Get the index of the listing that we want to update
+    // We need the index so that we can replace the old listing inside the array
+    // with the new one
+    // let indexToReplace = -1;
+    // for (let i =0; i < database.length; i++) {
+    //     if (database[i].id == listingId) {
+    //         indexToReplace = i;
+    //         break;
+    //     }
+    // }
+
+    const indexToReplace = database.findIndex(function(record){
+        return record.id == listingId;
+    });
+
+    // 3. create a new listing object based on what the user filled in for the form
+
+
+    // extract out the selected payments
+    let selectedPayments = [];
+    if (Array.isArray(req.body.payments)){
+        selectedPayments = req.body.payments
+    } else if (req.body.payments) {
+        selectedPayments = [ req.body.payments ];
+    }
+    
+
+    const newListing = {
+        'id': req.params.listingid,
+        'title': req.body.title,
+        'price': req.body.price,
+        'type': req.body.type,
+        'payments': selectedPayments
+    }
+
+    // 4. replace the old listing at the index with the new one
+    database[indexToReplace] = newListing;
+
+    res.redirect('/')
+})
+
 
 // 3. START SERVER
 app.listen(3000, function(){

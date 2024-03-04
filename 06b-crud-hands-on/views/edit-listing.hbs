@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Edit Listing</h1>
+    <form method="POST">
+        <div>
+            <label>Title</label>
+            <input type="text" 
+                name="title"
+                value="{{record.title}}"
+            />
+        </div>
+        <div>
+            <label>Price</label>
+            <input type="text" 
+                   name="price"
+                   value="{{record.price}}"
+            
+            />
+        </div>
+        <div>
+            <label>Payments</label>
+            <input type="checkbox" 
+               name="payments" 
+               value="cod" 
+               {{#inArray record.payments "cod"}}
+               checked
+               {{/inArray}}
+               />
+            <label>COD</label>
+
+            <input type="checkbox" 
+                   name="payments" 
+                   value="cheque"
+                {{#inArray record.payments "cheque"}}    
+                    checked
+                {{/inArray}}
+            />
+            <label>Cheque</label>
+
+            <input type="checkbox" 
+                   name="payments" 
+                   value="paynow" 
+                {{#inArray record.payments "paynow"}}
+                checked
+                {{/inArray}}       
+            />
+            <label>Paynow</label>
+        </div>
+        <div>
+            <label>Type</label>
+            <input type="radio" 
+                   name="type" 
+                   value="electronic"
+                   {{#eq record.type "electronic"}}
+                   checked
+                   {{/eq}}
+            />
+            <label>Electronic</label>
+
+            <input type="radio"
+                   name="type"
+                  value="entertainment"
+                  {{#eq record.type "entertainment"}}
+                  checked
+                  {{/eq}}
+                  />
+            <label>Entertainment</label>
+
+            <input type="radio"
+                   name="type"
+                   value="clothings"
+                   {{#eq record.type "clothings"}}
+                   checked
+                   {{/eq}}
+                   />
+            <label>Clothings</label>
+
+            <input type="radio"
+                   name="type" 
+                   value="others"
+                   {{#eq record.type "others"}}
+                   checked
+                   {{/eq}}
+            />
+            <label>Others</label>
+        </div>
+        <input type="submit"/>
+    </form>
+</body>
+</html>
