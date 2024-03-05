@@ -95,6 +95,53 @@ app.post("/recipe", function(req,res){
 })
 
 
+// delete
+app.delete("/recipe/:id", function(req,res){
+    // find the index of the recipe that we want to delete
+
+    // if findIndex cannot find the record we want, it will return -1
+    const indexToDelete = recipes.findIndex(function(r){
+        return r.id == req.params.id
+    })
+
+    if (indexToDelete == -1) {
+        res.status(400);
+        res.json({
+            "error":"The recipe ID cannot be found"
+        });
+        return;
+    }
+
+    recipes.splice(indexToDelete, 1);
+
+    res.status(200);
+    res.json({"message":"Recipe has been delete"});
+});
+
+app.put("/recipe/:id", function(req,res){
+    const title = req.body.title;
+    const ingredients = req.body.ingredients;
+    const cuisine = req.body.cuisine;
+
+    const modifiedRecipe = {
+        "title": title,
+        "ingredients": ingredients,
+        "cuisine": cuisine
+    }
+
+    // find the index in the recipes array to replace
+    const indexToReplace = recipes.findIndex(function(r){
+        return r.id == req.params.id;
+    })
+
+    recipes[indexToReplace] = modifiedRecipe;
+
+    res.status(200);
+    res.json({
+        "message":"Update is successful"
+    })
+})
+
 app.listen(3000, function(){
     console.log("server has started");
 })
